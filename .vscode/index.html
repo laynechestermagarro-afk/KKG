@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop KKG — Computer Parts &amp; Builds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ==================== LANDING PAGE ==================== -->
+  <div id="landing">
+    <nav class="navbar">
+      <a href="#" class="logo">
+        <div class="logo-icon">KKG</div>
+        Shop KKG
+      </a>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" onclick="openModal('login')">Sign In</button>
+        <button class="btn btn-primary" onclick="openModal('register')">Register</button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow"><span class="eyebrow-dot"></span> COMPUTER PARTS · CUSTOM BUILDS · REPAIRS</div>
+        <h1>Build your next<br><span class="hero-highlight">Computer.</span></h1>
+        <p>
+          Shop KKG is your home for dependable PC components, gaming gear, custom builds, and friendly repair service—all in one place.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" onclick="openModal('login')">
+            Sign In to Dashboard
+          </button>
+          <button class="btn btn-outline" onclick="openModal('register')">
+            Register
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="dashboard-preview">
+          <div class="preview-header">
+            <div class="preview-dots"><span></span><span></span><span></span></div>
+            SHOP KKG <span class="preview-header-sub">// PARTS &amp; PC BUILDS</span>
+          </div>
+          <div class="preview-body">
+            <div class="module-card">
+              <div class="module-icon" style="background:#dbeafe;color:#1e40af;">🎮</div>
+              <h4>Gaming PCs</h4>
+              <p>Ready-to-play builds</p>
+            </div>
+            <div class="module-card">
+              <div class="module-icon" style="background:#dcfce7;color:#166534;">📦</div>
+              <h4>PC Components</h4>
+              <p>CPUs, GPUs, memory &amp; more</p>
+            </div>
+            <div class="module-card">
+              <div class="module-icon" style="background:#fef3c7;color:#92400e;">🖥️</div>
+              <h4>Peripherals</h4>
+              <p>Keyboards, mice &amp; displays</p>
+            </div>
+            <div class="module-card">
+              <div class="module-icon" style="background:#fce7f3;color:#9d174d;">🛠️</div>
+              <h4>Repair Desk</h4>
+              <p>Diagnostics, upgrades &amp; care</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="section-title">
+        <div class="section-kicker">THE KKG DIFFERENCE</div>
+        <h2>Your setup starts here</h2>
+        <p>Quality parts, expert builds, and real support from people who know PCs.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#dbeafe;color:#1e40af;">⚡</div>
+          <h3>Performance Parts</h3>
+          <p>Shop processors, graphics cards, memory, storage, and the essentials for your next build.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#dcfce7;color:#166534;">📦</div>
+          <h3>Custom PC Builds</h3>
+          <p>Build a rig around your games, creative work, performance goals, and budget.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#fef3c7;color:#92400e;">🎧</div>
+          <h3>Gear &amp; Peripherals</h3>
+          <p>Finish your battlestation with crisp displays, responsive keyboards, and precise mice.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#fce7f3;color:#9d174d;">🛠️</div>
+          <h3>Repair &amp; Upgrade</h3>
+          <p>Get diagnostics, component upgrades, and practical help to keep your PC running strong.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 Shop KKG · Computer Parts, Builds &amp; Repairs</footer>
+  </div>
+
+  <!-- ==================== DASHBOARD ==================== -->
+  <div id="dashboard">
+    <div class="dash-layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-icon">KKG</div>
+          <span>Shop KKG</span>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav">
+          <!-- Populated by JS based on role -->
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-info" onclick="logout()">
+            <div class="user-avatar" id="userAvatar">U</div>
+            <div class="user-details">
+              <div class="name" id="userName">User</div>
+              <div class="role" id="userRoleLabel">User</div>
+            </div>
+            <span style="opacity:0.5;font-size:0.8rem;">Logout</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="main-content">
+        <header class="topbar">
+          <div class="topbar-title" id="pageTitle">Dashboard</div>
+          <div class="topbar-actions">
+            <span class="role-badge" id="roleBadge">User</span>
+          </div>
+        </header>
+        <div class="content-area" id="contentArea">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== LOGIN MODAL ==================== -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2>Welcome back</h2>
+          <p>Sign in to your Shop KKG account</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('login')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="demo-hint">
+          <strong>Prototype demo accounts (any password works):</strong>
+          superadmin@hope.com → Superadmin<br>
+          admin@hope.com → Admin<br>
+          user@hope.com → User<br>
+          Other accounts require the password created at registration.
+        </div>
+        <div class="alert alert-error" id="loginError"></div>
+        <div class="alert alert-success" id="loginSuccess"></div>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginEmail">Email address</label>
+            <input type="email" id="loginEmail" placeholder="you@company.com" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="loginPassword" placeholder="Enter your password" required />
+              <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)">👁</button>
+            </div>
+          </div>
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="rememberMe" /> Remember me
+            </label>
+            <a class="link" onclick="switchModal('login','reset')">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+        </form>
+        <div class="form-footer">
+          Don't have an account? <a class="link" onclick="switchModal('login','register')">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== REGISTER MODAL ==================== -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2>Create your account</h2>
+          <p>Join Shop KKG</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('register')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="registerError"></div>
+        <div class="alert alert-success" id="registerSuccess"></div>
+        <div class="role-note">
+          New accounts are created as <strong>User</strong>. Superadmin and Admin roles can only be assigned by existing administrators.
+        </div>
+        <form id="registerForm" onsubmit="handleRegister(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regFirstName">First name</label>
+              <input type="text" id="regFirstName" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label for="regLastName">Last name</label>
+              <input type="text" id="regLastName" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="regEmail">Email address</label>
+            <input type="email" id="regEmail" placeholder="you@company.com" required />
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="regPassword" placeholder="At least 8 characters" minlength="8" autocomplete="new-password" required />
+              <button type="button" class="toggle-password" onclick="togglePassword('regPassword', this)" aria-label="Show password">👁</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="regPasswordConfirm">Confirm password</label>
+            <input type="password" id="regPasswordConfirm" placeholder="Re-enter your password" minlength="8" autocomplete="new-password" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Register</button>
+        </form>
+        <div class="form-footer">
+          Already have an account? <a class="link" onclick="switchModal('register','login')">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== RESET PASSWORD MODAL ==================== -->
+  <div class="modal-overlay" id="resetModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2>Reset password</h2>
+          <p>We'll send you a secure link to reset it</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('reset')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="resetError"></div>
+        <div class="alert alert-success" id="resetSuccess"></div>
+        <form id="resetForm" onsubmit="handleReset(event)">
+          <div class="form-group">
+            <label for="resetEmail">Email address</label>
+            <input type="email" id="resetEmail" placeholder="you@company.com" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Reset Link</button>
+        </form>
+        <div class="role-note" style="margin-top:16px;">Local demo only: no email is sent. For an existing demo account, use the button below to continue the reset flow. Production password recovery must use a verified email link.</div>
+        <button type="button" class="btn btn-outline btn-full" id="resetDemoLink" onclick="openSetPassword()" hidden>Continue to set password (demo)</button>
+        <div class="form-footer">
+          Remember your password? <a class="link" onclick="switchModal('reset','login')">Back to Sign In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SET PASSWORD MODAL ==================== -->
+  <div class="modal-overlay" id="setPasswordModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2>Set a new password</h2>
+          <p>Choose a new password for your account</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('setPassword')" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="setPasswordError"></div>
+        <form id="setPasswordForm" onsubmit="handleSetPassword(event)">
+          <div class="form-group">
+            <label for="setPasswordEmail">Email address</label>
+            <input type="email" id="setPasswordEmail" readonly required />
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New password</label>
+            <div class="password-wrapper">
+              <input type="password" id="newPassword" placeholder="At least 8 characters" minlength="8" autocomplete="new-password" required />
+              <button type="button" class="toggle-password" onclick="togglePassword('newPassword', this)" aria-label="Show password">👁</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newPasswordConfirm">Confirm new password</label>
+            <input type="password" id="newPasswordConfirm" placeholder="Re-enter your password" minlength="8" autocomplete="new-password" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Save new password</button>
+        </form>
+        <div class="form-footer">
+          <a class="link" onclick="switchModal('setPassword','login')">Back to Sign In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CUSTOMER FORM MODAL ==================== -->
+  <div class="modal-overlay" id="customerModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div>
+          <h2 id="customerModalTitle">Add Customer</h2>
+          <p id="customerModalSub">Enter customer details</p>
+        </div>
+        <button class="modal-close" onclick="closeCustomerModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="customerError"></div>
+        <form id="customerForm" onsubmit="saveCustomer(event)">
+          <input type="hidden" id="custEditNo" value="" />
+          <div class="form-group">
+            <label for="custNo">Customer No.</label>
+            <input type="text" id="custNo" placeholder="e.g. C-001" required />
+          </div>
+          <div class="form-group">
+            <label for="custName">Customer Name</label>
+            <input type="text" id="custName" placeholder="Company or person name" required />
+          </div>
+          <div class="form-group">
+            <label for="custAddress">Address</label>
+            <input type="text" id="custAddress" placeholder="Full address" required />
+          </div>
+          <div class="form-group">
+            <label for="custPayterms">Payment Terms</label>
+            <input type="text" id="custPayterms" placeholder="e.g. Net 30, COD, Prepaid" required />
+          </div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="customerSaveBtn">Save Customer</button>
+            <button type="button" class="btn btn-secondary" onclick="closeCustomerModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PRODUCT FORM MODAL ==================== -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div>
+          <h2 id="productModalTitle">Add Product</h2>
+          <p id="productModalSub">Enter product details</p>
+        </div>
+        <button class="modal-close" onclick="closeProductModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="productError"></div>
+        <form id="productForm" onsubmit="saveProduct(event)">
+          <input type="hidden" id="prodEditCode" value="" />
+          <div class="form-group">
+            <label for="prodCode">Product Code</label>
+            <input type="text" id="prodCode" placeholder="e.g. P-001" required />
+          </div>
+          <div class="form-group">
+            <label for="prodDesc">Description</label>
+            <input type="text" id="prodDesc" placeholder="Product description" required />
+          </div>
+          <div class="form-group">
+            <label for="prodUnit">Unit</label>
+            <input type="text" id="prodUnit" placeholder="e.g. pcs, box, kg, liter" required />
+          </div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="productSaveBtn">Save Product</button>
+            <button type="button" class="btn btn-secondary" onclick="closeProductModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PRICE HISTORY FORM MODAL ==================== -->
+  <div class="modal-overlay" id="priceModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div>
+          <h2 id="priceModalTitle">Add Price</h2>
+          <p id="priceModalSub">Set unit price for product</p>
+        </div>
+        <button class="modal-close" onclick="closePriceModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="priceError"></div>
+        <form id="priceForm" onsubmit="savePrice(event)">
+          <input type="hidden" id="priceEditKey" value="" />
+          <div class="form-group">
+            <label for="priceProdCode">Product Code</label>
+            <input type="text" id="priceProdCode" readonly />
+          </div>
+          <div class="form-group">
+            <label for="priceEffDate">Effective Date</label>
+            <input type="date" id="priceEffDate" required />
+          </div>
+          <div class="form-group">
+            <label for="priceUnitPrice">Unit Price</label>
+            <input type="number" id="priceUnitPrice" step="0.01" min="0" placeholder="0.00" required />
+          </div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="priceSaveBtn">Save Price</button>
+            <button type="button" class="btn btn-secondary" onclick="closePriceModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PRICE HISTORY LIST MODAL ==================== -->
+  <div class="modal-overlay" id="priceHistModal">
+    <div class="modal modal-xl">
+      <div class="modal-header">
+        <div>
+          <h2 id="priceHistTitle">Price History</h2>
+          <p id="priceHistSub">Manage unit prices by effective date</p>
+        </div>
+        <button class="modal-close" onclick="closePriceHistModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="priceHistToolbar" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;"></div>
+        <div class="data-table-wrap modal-body-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Effective Date</th>
+                <th>Unit Price</th>
+                <th>Status</th>
+                <th>Stamp</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="priceHistBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HR: EMPLOYEE MODAL ==================== -->
+  <div class="modal-overlay" id="empModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div><h2 id="empModalTitle">Add Employee</h2><p id="empModalSub">Enter employee details</p></div>
+        <button class="modal-close" onclick="closeEmpModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="empError"></div>
+        <form id="empForm" onsubmit="saveEmployee(event)">
+          <input type="hidden" id="empEditNo" value="" />
+          <div class="form-row">
+            <div class="form-group"><label>Employee No.</label><input type="text" id="empNo" required placeholder="E-001" /></div>
+            <div class="form-group"><label>Gender</label>
+              <select id="empGender" required style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                <option value="M">Male</option><option value="F">Female</option><option value="O">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" id="empFirst" required /></div>
+            <div class="form-group"><label>Last Name</label><input type="text" id="empLast" required /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Birth Date</label><input type="date" id="empBirth" required /></div>
+            <div class="form-group"><label>Hire Date</label><input type="date" id="empHire" required /></div>
+          </div>
+          <div class="form-group"><label>Separation Date (optional)</label><input type="date" id="empSep" /></div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="empSaveBtn">Save Employee</button>
+            <button type="button" class="btn btn-secondary" onclick="closeEmpModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HR: JOB MODAL ==================== -->
+  <div class="modal-overlay" id="jobModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div><h2 id="jobModalTitle">Add Job</h2><p>Job code and description</p></div>
+        <button class="modal-close" onclick="closeJobModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="jobError"></div>
+        <form id="jobForm" onsubmit="saveJob(event)">
+          <input type="hidden" id="jobEditCode" value="" />
+          <div class="form-group"><label>Job Code</label><input type="text" id="jobCode" required placeholder="J-001" /></div>
+          <div class="form-group"><label>Job Description</label><input type="text" id="jobDesc" required /></div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="jobSaveBtn">Save Job</button>
+            <button type="button" class="btn btn-secondary" onclick="closeJobModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HR: DEPARTMENT MODAL ==================== -->
+  <div class="modal-overlay" id="deptModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div><h2 id="deptModalTitle">Add Department</h2><p>Department code and name</p></div>
+        <button class="modal-close" onclick="closeDeptModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="deptError"></div>
+        <form id="deptForm" onsubmit="saveDept(event)">
+          <input type="hidden" id="deptEditCode" value="" />
+          <div class="form-group"><label>Department Code</label><input type="text" id="deptCode" required placeholder="D-001" /></div>
+          <div class="form-group"><label>Department Name</label><input type="text" id="deptName" required /></div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="deptSaveBtn">Save Department</button>
+            <button type="button" class="btn btn-secondary" onclick="closeDeptModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HR: JOB HISTORY FORM MODAL ==================== -->
+  <div class="modal-overlay" id="jhFormModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div><h2 id="jhFormTitle">Add Job History</h2><p id="jhFormSub">Assignment details</p></div>
+        <button class="modal-close" onclick="closeJhFormModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="jhError"></div>
+        <form id="jhForm" onsubmit="saveJobHistory(event)">
+          <input type="hidden" id="jhEditKey" value="" />
+          <div class="form-group"><label>Employee No.</label><input type="text" id="jhEmpNo" readonly /></div>
+          <div class="form-row">
+            <div class="form-group"><label>Effective Date</label><input type="date" id="jhEffDate" required /></div>
+            <div class="form-group"><label>Salary</label><input type="number" id="jhSalary" step="0.01" min="0" required /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Job</label>
+              <select id="jhJobCode" required style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:inherit;"></select>
+            </div>
+            <div class="form-group"><label>Department</label>
+              <select id="jhDeptCode" required style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:inherit;"></select>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="jhSaveBtn">Save</button>
+            <button type="button" class="btn btn-secondary" onclick="closeJhFormModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HR: JOB HISTORY LIST MODAL ==================== -->
+  <div class="modal-overlay" id="jhListModal">
+    <div class="modal modal-xl">
+      <div class="modal-header">
+        <div><h2 id="jhListTitle">Job History</h2><p id="jhListSub">Employment assignments</p></div>
+        <button class="modal-close" onclick="closeJhListModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="jhListToolbar" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;"></div>
+        <div class="data-table-wrap modal-body-scroll">
+          <table class="data-table">
+            <thead><tr id="jhListHead"></tr></thead>
+            <tbody id="jhListBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SALES HEADER MODAL ==================== -->
+  <div class="modal-overlay" id="salesModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div><h2 id="salesModalTitle">New Sale</h2><p id="salesModalSub">Transaction header</p></div>
+        <button class="modal-close" onclick="closeSalesModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="salesError"></div>
+        <form id="salesForm" onsubmit="saveSale(event)">
+          <input type="hidden" id="salesEditNo" value="" />
+          <div class="form-group"><label>Transaction No.</label><input type="text" id="salesTransNo" required placeholder="T-001" /></div>
+          <div class="form-group"><label>Sales Date</label><input type="date" id="salesDate" required /></div>
+          <div class="form-group"><label>Customer</label>
+            <select id="salesCustNo" required style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:inherit;"></select>
+          </div>
+          <div class="form-group"><label>Employee (Salesperson)</label>
+            <select id="salesEmpNo" required style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:inherit;"></select>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="salesSaveBtn">Save Sale</button>
+            <button type="button" class="btn btn-secondary" onclick="closeSalesModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SALES DETAIL FORM MODAL ==================== -->
+  <div class="modal-overlay" id="sdFormModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div><h2 id="sdFormTitle">Add Line Item</h2><p id="sdFormSub">Product and quantity</p></div>
+        <button class="modal-close" onclick="closeSdFormModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="sdError"></div>
+        <form id="sdForm" onsubmit="saveSalesDetail(event)">
+          <input type="hidden" id="sdEditKey" value="" />
+          <div class="form-group"><label>Transaction No.</label><input type="text" id="sdTransNo" readonly /></div>
+          <div class="form-group"><label>Product</label>
+            <select id="sdProdCode" required style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:inherit;"
+              onchange="updateSdPriceHint()"></select>
+          </div>
+          <div class="form-group"><label>Quantity</label><input type="number" id="sdQty" min="1" step="1" required value="1" /></div>
+          <p id="sdPriceHint" style="font-size:0.85rem;color:var(--text-muted);margin-bottom:12px;"></p>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full" id="sdSaveBtn">Save Line</button>
+            <button type="button" class="btn btn-secondary" onclick="closeSdFormModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SALES DETAIL LIST MODAL ==================== -->
+  <div class="modal-overlay" id="sdListModal">
+    <div class="modal modal-xl">
+      <div class="modal-header">
+        <div><h2 id="sdListTitle">Sale Details</h2><p id="sdListSub">Line items</p></div>
+        <button class="modal-close" onclick="closeSdListModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="sdListToolbar" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;"></div>
+        <div class="data-table-wrap modal-body-scroll">
+          <table class="data-table">
+            <thead><tr id="sdListHead"></tr></thead>
+            <tbody id="sdListBody"></tbody>
+          </table>
+        </div>
+        <div id="sdListTotal" style="text-align:right;margin-top:12px;font-weight:600;font-size:1.05rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== USER MGMT: ADD/EDIT USER MODAL ==================== -->
+  <div class="modal-overlay" id="umUserModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div><h2 id="umUserTitle">Add User</h2><p>Account details</p></div>
+        <button class="modal-close" onclick="closeUmUserModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-error" id="umUserError"></div>
+        <form id="umUserForm" onsubmit="saveUmUser(event)">
+          <input type="hidden" id="umEditEmail" value="" />
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" id="umFirst" required /></div>
+            <div class="form-group"><label>Last Name</label><input type="text" id="umLast" required /></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" id="umEmail" required /></div>
+          <div class="form-row">
+            <div class="form-group"><label>Role</label>
+              <select id="umRole" required style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:inherit;"></select>
+            </div>
+            <div class="form-group"><label>Status</label>
+              <select id="umStatus" required style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+                <option value="blocked">Blocked</option>
+                <option value="disapproved">Disapproved</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary btn-full">Save User</button>
+            <button type="button" class="btn btn-secondary" onclick="closeUmUserModal()" style="min-width:100px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== USER MGMT: RIGHTS MODAL ==================== -->
+  <div class="modal-overlay" id="umRightsModal">
+    <div class="modal modal-xl">
+      <div class="modal-header">
+        <div><h2 id="umRightsTitle">Assign Rights</h2><p id="umRightsSub">Module and function access</p></div>
+        <button class="modal-close" onclick="closeUmRightsModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="umRightsBody" class="modal-body-scroll"></div>
+        <div style="display:flex;gap:10px;margin-top:16px;">
+          <button type="button" class="btn btn-primary btn-full" onclick="saveUmRights()">Save Rights</button>
+          <button type="button" class="btn btn-secondary" onclick="closeUmRightsModal()" style="min-width:100px;">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
