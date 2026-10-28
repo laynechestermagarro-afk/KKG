@@ -2892,15 +2892,18 @@
       supabaseConnectionState = { type: 'loading', message: 'Contacting the Supabase REST API…' };
       renderDatabaseSettings();
       try {
-        const response = await fetch(`${config.url.replace(/\/$/, '')}/rest/v1/`, {
+        const response = await fetch(`${config.url.replace(/\/$/, '')}/auth/v1/health`, {
           method: 'GET',
           headers: { apikey: config.key, Accept: 'application/openapi+json, application/json' },
           signal: AbortSignal.timeout(10000)
         });
         if (!response.ok) {
-          throw new Error(response.status === 401 || response.status === 403
-            ? 'The API rejected the key. Check the project URL and publishable/anon key.'
-            : `Supabase REST API returned HTTP ${response.status}.`);
+          const responseBody = await response.text();
+
+          throw new Error(
+            `Supabase REST API returned HTTP ${response.status}. ` +
+            `Response: ${responseBody.slice(0, 300)}`
+          );
         }
         supabaseConnectionState = { type: 'success', message: 'Supabase REST API responded successfully. This confirms API reachability, not table permissions or application data access.' };
       } catch (error) {
