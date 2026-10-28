@@ -2892,21 +2892,36 @@
       supabaseConnectionState = { type: 'loading', message: 'Contacting the Supabase REST API…' };
       renderDatabaseSettings();
       try {
+ HEAD
         const response = await fetch(`${config.url.replace(/\/$/, '')}/auth/v1/health`, {
           method: 'GET',
-          headers: { apikey: config.key, Accept: 'application/openapi+json, application/json' },
+          headers: { apikey: config.key, Accept: 'application/json' },
           signal: AbortSignal.timeout(10000)
         });
+
         if (!response.ok) {
           const responseBody = await response.text();
+          let responseMessage = responseBody;
+
+          try {
+            const errorBody = JSON.parse(responseBody);
+            responseMessage = [errorBody.message, errorBody.hint]
+              .filter(Boolean)
+              .join(' ');
+          } catch {
+            responseMessage = responseBody;
+          }
 
           throw new Error(
-            `Supabase REST API returned HTTP ${response.status}. ` +
-            `Response: ${responseBody.slice(0, 300)}`
+            `Supabase Auth API returned HTTP ${response.status}. ` +
+            `${responseMessage.slice(0, 300)}`
           );
         }
-        supabaseConnectionState = { type: 'success', message: 'Supabase REST API responded successfully. This confirms API reachability, not table permissions or application data access.' };
-      } catch (error) {
+
+        supabaseConnectionState = {
+          type: 'success',
+          message: 'Supabase Auth API responded successfully. This confirms API reachability, not table permissions or application data access.'
+        };   catch (error) {
         supabaseConnectionState = {
           type: 'error',
           message: error.name === 'TimeoutError' ? 'Connection timed out. Check the project URL and network.'
