@@ -2892,17 +2892,28 @@
       supabaseConnectionState = { type: 'loading', message: 'Contacting the Supabase REST API…' };
       renderDatabaseSettings();
       try {
-        const response = await fetch(`${config.url.replace(/\/$/, '')}/rest/v1/`, {
+        const endpoint = new URL('/rest/v1/role', config.url);
+        endpoint.searchParams.set('select', 'code');
+        endpoint.searchParams.set('limit', '0');
+        const response = await fetch(endpoint, {
           method: 'GET',
-          headers: { apikey: config.key, Accept: 'application/openapi+json, application/json' },
+          headers: { apikey: config.key, Accept: 'application/json' },
           signal: AbortSignal.timeout(10000)
         });
         if (!response.ok) {
-          throw new Error(response.status === 401 || response.status === 403
-            ? 'The API rejected the key. Check the project URL and publishable/anon key.'
-            : `Supabase REST API returned HTTP ${response.status}.`);
+          const responseBody = await response.text();
+          let responseMessage = responseBody;
+          try {
+            const errorBody = JSON.parse(responseBody);
+            responseMessage = [errorBody.message, errorBody.hint].filter(Boolean).join(' ');
+          } catch {
+            responseMessage = responseBody;
+          }
+          throw new Error(
+            `Supabase table check returned HTTP ${response.status}.${responseMessage ? ` ${responseMessage}` : ''}`
+          );
         }
-        supabaseConnectionState = { type: 'success', message: 'Supabase REST API responded successfully. This confirms API reachability, not table permissions or application data access.' };
+        supabaseConnectionState = { type: 'success', message: 'Supabase accepted the publishable key and responded to a zero-row query on public.role. This confirms API access to that table, not application data access.' };
       } catch (error) {
         supabaseConnectionState = {
           type: 'error',
